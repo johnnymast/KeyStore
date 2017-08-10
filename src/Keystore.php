@@ -43,4 +43,13 @@ class Keystore
         }
         return $this->adapter;
     }
+
+    public function setAdapter($adapter = null)
+    {
+        if ($adapter) {
+            $this->adapter = $adapter;
+        }
+
+        return $this;
+    }
 }

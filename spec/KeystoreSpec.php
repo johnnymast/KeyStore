@@ -2,9 +2,10 @@
 
 namespace spec\johnnymast\KeyStore;
 
-use johnnymast\KeyStore\Keystore;
-use johnnymast\KeyStore\Adapters\SessionAdapter;
 use johnnymast\KeyStore\Adapters\AdapterInterface;
+use johnnymast\KeyStore\Adapters\NullAdapter;
+use johnnymast\KeyStore\Adapters\SessionAdapter;
+use johnnymast\KeyStore\Keystore;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -34,7 +35,19 @@ class KeystoreSpec extends ObjectBehavior
         $adapter->shouldHaveType(AdapterInterface::class);
     }
 
-    function it_as_in_get_adapter_should_return_the_session_adapter_by_default() {
+    function it_as_in_get_adapter_should_return_the_session_adapter_by_default()
+    {
         $this->getAdapter()->shouldHaveType(SessionAdapter::class);
+    }
+
+    function it_should_return_this_after_calling_setadapter(NullAdapter $adapter)
+    {
+        $this->setAdapter($adapter)->shouldReturn($this);
+    }
+
+    function it_should_be_able_to_accept_custom_adapters(NullAdapter $adapter)
+    {
+        $this->setAdapter($adapter);
+        $this->getAdapter()->shouldReturn($adapter);
     }
 }
