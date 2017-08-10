@@ -29,6 +29,19 @@ class KeystoreSpec extends ObjectBehavior
         $this->set($key, $value)->get($key)->shouldReturn($value);
     }
 
+    function it_should_be_able_to_check_if_keystore_has_a_value()
+    {
+        $key = 'mykey';
+        $value = 'myvalue';
+
+        $this->set($key, $value)->has($key)->shouldReturn(true);
+    }
+
+    function it_should_be_able_to_save_the_keys()
+    {
+        $this->save();
+    }
+
     function it_as_in_get_adapter_should_be_an_instanceof_adapter_interface()
     {
         $adapter = $this->getAdapter();

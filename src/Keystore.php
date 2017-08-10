@@ -24,6 +24,7 @@ class Keystore
     public function set($key = '', $value = null)
     {
         $this->store[$key] = $value;
+
         return $this;
     }
 
@@ -36,14 +37,22 @@ class Keystore
         return $this->store[$key];
     }
 
+    /**
+     * @return \johnnymast\KeyStore\AdapterInterface|\johnnymast\KeyStore\Adapters\SessionAdapter
+     */
     public function getAdapter()
     {
         if (! $this->adapter) {
             $this->adapter = new SessionAdapter();
         }
+
         return $this->adapter;
     }
 
+    /**
+     * @param null $adapter
+     * @return $this
+     */
     public function setAdapter($adapter = null)
     {
         if ($adapter) {
@@ -51,5 +60,22 @@ class Keystore
         }
 
         return $this;
+    }
+
+    /**
+     *
+     */
+    public function save()
+    {
+        $this->getAdapter()->write();
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function has($key = '')
+    {
+        return (isset($this->store[$key]));
     }
 }
