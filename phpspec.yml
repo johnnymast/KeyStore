@@ -1,4 +1,4 @@
 suites:
-  morsecode_suite:
+  keystore_suite:
       namespace: johnnymast\KeyStore
       psr4_prefix: johnnymast\KeyStore
